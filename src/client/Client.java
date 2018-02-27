@@ -36,8 +36,8 @@ public class Client extends ApplicationWindow {
     private JTextField textField;
     private Constraints c_textField;
     
-    //private JTextField keyField;
-    //private Constraints c_keyField;
+    /*private JTextField keyField;
+    private Constraints c_keyField;*/
     
     public static void main(String[] args) {
     	String readName = System.getProperty("user.name");
