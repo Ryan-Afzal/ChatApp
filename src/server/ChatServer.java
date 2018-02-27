@@ -208,6 +208,7 @@ public class ChatServer extends ApplicationWindow {
     
     public void output(String message) {
     	this.textArea.setText(this.textArea.getText() + "\n" + message);
+    	this.textArea.setCaretPosition(this.textArea.getText().length());
     }
     
     public void output(Message message) {
