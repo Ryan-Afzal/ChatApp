@@ -7,14 +7,17 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import javax.swing.*;
 
+import command.Command;
 import constraints.Constraints;
 import message.Message;
+import server.ClientInThread;
 import tools.Tools;
 import window.ApplicationWindow;
 
@@ -25,8 +28,12 @@ public class Client extends ApplicationWindow {
     private boolean send = false;
     
     private String userName;
+    
+    
     private String serverHost;
     private int serverPort;
+    
+    private ArrayList<Command> commands;
     
     private GridBagLayout layout;
     
@@ -76,6 +83,12 @@ public class Client extends ApplicationWindow {
         textField.setColumns(50);
         textField.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		/*for (Command command : commands) {
+        			if (command.getTrigger().equals(textField.getText().split(" ")[0])) {
+        				process(textField.getText());
+        				return;
+        			}
+        		}*/
         		send = true;
         	}
         });
@@ -139,6 +152,38 @@ public class Client extends ApplicationWindow {
     
     public String getUserName() {
     	return this.userName;
+    }
+    
+    private void initActions() {
+    	this.commands.add(new Command() {
+    		public void run(String[] args) {
+    			userName = args[0];
+    		}
+    		
+    		public String getTrigger() {
+    			return "-name";
+    		}
+    	});
+    }
+    
+    public boolean process(String command) {
+    	String[] commands = command.split(" ");
+    	command = commands[0];
+    	if (commands.length > 1) {
+    		String[] temp = commands;
+    		commands = new String[commands.length - 1];
+    		for (int i = 1; i < commands.length; i++) {
+    			commands[i] = temp[i + 1];
+    		}
+    	}
+    	for (Command c : this.commands) {
+    		if (c.getTrigger().equals(command)) {
+    			c.run(commands);
+    			textField.setText("");
+    			return true;
+    		}
+    	}
+    	return false;
     }
     
     /*public byte[] getKey() {

@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import command.Command;
 import constraints.Constraints;
 import tools.Tools;
 import window.ApplicationWindow;
