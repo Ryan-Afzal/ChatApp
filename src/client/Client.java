@@ -10,6 +10,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import javax.swing.*;
@@ -171,7 +172,13 @@ public class Client extends ApplicationWindow {
     	});
     	this.commands.add(new Command() {
     		public void run(String[] args) {
-    			userName = args[0];
+    			String temp = args[0];
+    			
+    			for (int i = 1; i < args.length; i++) {
+    				temp += (" " + args[i]);
+    			}
+    			
+    			userName = temp;
     		}
     		
     		public String getTrigger() {

@@ -24,6 +24,8 @@ public abstract class Misc {
     	
     	if (minute < 10) {
     		s_minute = "0" + minute;
+    	} else {
+    		s_minute = "" + minute;
     	}
     	
     	String time = hour + ":" + s_minute + m;
