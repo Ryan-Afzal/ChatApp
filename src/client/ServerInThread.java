@@ -7,6 +7,7 @@ import java.net.Socket;
 import encryption.Encryption;
 import encryption.EncryptionException;
 import message.Message;
+import command.Instruction;
 
 @SuppressWarnings("unused")
 public class ServerInThread implements Runnable {
@@ -31,7 +32,22 @@ public class ServerInThread implements Runnable {
             while (!socket.isClosed() && this.client.isRunning()) {
                 	try {
                 		Message input = (Message) serverIn.readObject();
-                		print("[" + input.getTimestamp() + "] " + input.getUser() + ": " + input.getText());
+                		
+                		switch (input.getAttachmentType()) {
+                			case NONE:
+                				print("[" + input.getTimestamp() + "] " + input.getUser() + ": " + input.getText());
+                				break;
+                			case IMAGE:
+                				//Load Image
+                				break;
+                			case FILE:
+                				//Load File
+                				break;
+                			case INSTRUCTION:
+                				Instruction inst = (Instruction) input.getAttachment();
+                				inst.run();
+                				break;
+                		}
                 	} catch (ClassNotFoundException e) {
                 		System.out.println(e);
                 	} catch (EOFException e) {
