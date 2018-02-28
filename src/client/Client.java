@@ -17,6 +17,7 @@ import javax.swing.*;
 import command.Command;
 import constraints.Constraints;
 import message.Message;
+import misc.Misc;
 import server.ClientInThread;
 import tools.Tools;
 import window.ApplicationWindow;
@@ -123,30 +124,10 @@ public class Client extends ApplicationWindow {
             serverOutThread.start();
             while(this.isRunning() && serverOutThread.isAlive() && serverInThread.isAlive()) {
                 if (send) {
-                	GregorianCalendar calendar = new GregorianCalendar();
-                	
-                	int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                	int minute = calendar.get(Calendar.MINUTE);
-                	
-                	String m = "";
-                	
-                	String s_minute = "";
-                	
-                	if (hour > 12) {
-                		hour -= 12;
-                		m = "pm";
-                	} else {
-                		m = "am";
-                	}
-                	
-                	if (minute < 10) {
-                		s_minute = "0" + minute;
-                	}
-                	
-                	String time = hour + ":" + s_minute + m;
-                	
+                	String time = Misc.getTime();
                 	String text = textField.getText();
                 	//Do Encryption here
+                	
                 	
                 	Message message = new Message(text, time, this.userName);
                     serverOut.addNextMessage(message);
@@ -178,6 +159,7 @@ public class Client extends ApplicationWindow {
     	this.commands = new ArrayList<Command>();
     	this.commands.add(new Command() {
     		public void run(String[] args) {
+    			output("[COMMAND] COMMANDS:");
     			for (int i = 1; i < commands.size(); i++) {
     				output(commands.get(i).getTrigger() + ": " + commands.get(i).getInfo());
     			}

@@ -21,6 +21,7 @@ import tools.Tools;
 import window.ApplicationWindow;
 
 import message.Message;
+import misc.Misc;
 
 public class ChatServer extends ApplicationWindow {
 	
@@ -145,7 +146,7 @@ public class ChatServer extends ApplicationWindow {
                 clientInThread.start();
                 clientOutThread.start();
                 
-                clientOut.addNextMessage(new Message(this.log, "", "[SERVER]"));
+                clientOut.addNextMessage(new Message(this.log, Misc.getTime(), "[SERVER]"));
                 
                 toClients.add(clientOut);
                 fromClients.add(clientIn);
@@ -159,6 +160,7 @@ public class ChatServer extends ApplicationWindow {
     	this.commands = new ArrayList<Command>();
     	this.commands.add(new Command() {
     		public void run(String[] args) {
+    			output("[COMMAND] COMMANDS:");
     			for (int i = 1; i < commands.size(); i++) {
     				output(commands.get(i).getTrigger() + ": " + commands.get(i).getInfo());
     			}
