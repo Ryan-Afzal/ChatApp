@@ -57,6 +57,7 @@ public class Client extends ApplicationWindow {
     	Tools.setLookAndFeel();
         this.userName = userName;
         this.serverPort = portNumber;
+        this.initActions();
         try {
         	this.serverHost = InetAddress.getByName("51S500036590").getHostAddress();
         } catch (UnknownHostException e) {
@@ -83,12 +84,12 @@ public class Client extends ApplicationWindow {
         textField.setColumns(50);
         textField.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		/*for (Command command : commands) {
+        		for (Command command : commands) {
         			if (command.getTrigger().equals(textField.getText().split(" ")[0])) {
         				process(textField.getText());
         				return;
         			}
-        		}*/
+        		}
         		send = true;
         	}
         });
@@ -123,7 +124,26 @@ public class Client extends ApplicationWindow {
             while(this.isRunning() && serverOutThread.isAlive() && serverInThread.isAlive()) {
                 if (send) {
                 	GregorianCalendar calendar = new GregorianCalendar();
-                	String time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
+                	
+                	int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                	int minute = calendar.get(Calendar.MINUTE);
+                	
+                	String m = "";
+                	
+                	String s_minute = "";
+                	
+                	if (hour > 12) {
+                		hour -= 12;
+                		m = "pm";
+                	} else {
+                		m = "am";
+                	}
+                	
+                	if (minute < 10) {
+                		s_minute = "0" + minute;
+                	}
+                	
+                	String time = hour + ":" + s_minute + m;
                 	
                 	String text = textField.getText();
                 	//Do Encryption here
@@ -155,6 +175,18 @@ public class Client extends ApplicationWindow {
     }
     
     private void initActions() {
+    	this.commands = new ArrayList<Command>();
+    	this.commands.add(new Command() {
+    		public void run(String[] args) {
+    			for (int i = 1; i < commands.size(); i++) {
+    				output(commands.get(i).getTrigger() + ": " + commands.get(i).getInfo());
+    			}
+    		}
+    		
+    		public String getTrigger() {
+    			return "-commands";
+    		}
+    	});
     	this.commands.add(new Command() {
     		public void run(String[] args) {
     			userName = args[0];
@@ -162,6 +194,10 @@ public class Client extends ApplicationWindow {
     		
     		public String getTrigger() {
     			return "-name";
+    		}
+    		
+    		public String getInfo() {
+    			return "Changes the user's name to the entered value.";
     		}
     	});
     }
@@ -172,7 +208,7 @@ public class Client extends ApplicationWindow {
     	if (commands.length > 1) {
     		String[] temp = commands;
     		commands = new String[commands.length - 1];
-    		for (int i = 1; i < commands.length; i++) {
+    		for (int i = 0; i < commands.length; i++) {
     			commands[i] = temp[i + 1];
     		}
     	}

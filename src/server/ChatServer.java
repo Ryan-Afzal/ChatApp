@@ -159,11 +159,26 @@ public class ChatServer extends ApplicationWindow {
     	this.commands = new ArrayList<Command>();
     	this.commands.add(new Command() {
     		public void run(String[] args) {
+    			for (int i = 1; i < commands.size(); i++) {
+    				output(commands.get(i).getTrigger() + ": " + commands.get(i).getInfo());
+    			}
+    		}
+    		
+    		public String getTrigger() {
+    			return "-commands";
+    		}
+    	});
+    	this.commands.add(new Command() {
+    		public void run(String[] args) {
     			output("[COMMAND] IP: " + serverSocket.getInetAddress().toString());
     		}
     		
     		public String getTrigger() {
     			return "-ip";
+    		}
+    		
+    		public String getInfo() {
+    			return "Gives the server's ip address";
     		}
     	});
     	this.commands.add(new Command() {
@@ -182,6 +197,10 @@ public class ChatServer extends ApplicationWindow {
     		
     		public String getTrigger() {
     			return "-clients";
+    		}
+    		
+    		public String getInfo() {
+    			return "Gives the number of connected clients";
     		}
     	});
     	
