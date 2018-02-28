@@ -1,5 +1,7 @@
 package message;
 
-public enum AttachmentType {
+import java.io.Serializable;
+
+public enum AttachmentType implements Serializable {
 	NONE, IMAGE, FILE, INSTRUCTION;
 }

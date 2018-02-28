@@ -1,5 +1,7 @@
 package command;
 
-public interface Instruction {
+import java.io.Serializable;
+
+public interface Instruction extends Serializable {
 	public void run();
 }

@@ -16,7 +16,9 @@ import java.util.GregorianCalendar;
 import javax.swing.*;
 
 import command.Command;
+import command.Instruction;
 import constraints.Constraints;
+import message.AttachmentType;
 import message.Message;
 import misc.Misc;
 import server.ClientInThread;
@@ -30,7 +32,8 @@ public class Client extends ApplicationWindow {
     private boolean send = false;
     
     private String userName;
-    
+    ServerInThread serverIn;
+    ServerOutThread serverOut;
     
     private String serverHost;
     private int serverPort;
@@ -117,8 +120,8 @@ public class Client extends ApplicationWindow {
         try{
             Socket socket = new Socket(serverHost, serverPort);
             Thread.sleep(1000);
-            ServerInThread serverIn = new ServerInThread(socket, this);
-            ServerOutThread serverOut = new ServerOutThread(socket, this);
+            serverIn = new ServerInThread(socket, this);
+            serverOut = new ServerOutThread(socket, this);
             Thread serverInThread = new Thread(serverIn);
             Thread serverOutThread = new Thread(serverOut);
             serverInThread.start();
@@ -189,6 +192,28 @@ public class Client extends ApplicationWindow {
     			return "Changes the user's name to the entered value.";
     		}
     	});
+    	/*this.commands.add(new Command() {
+    		public void run(String[] args) {
+    			String temp = args[0];
+    			
+    			for (int i = 1; i < args.length; i++) {
+    				temp += (" " + args[i]);
+    			}
+    			args[0] = temp;
+    			Message message = new Message("", "", "", new Instruction() {
+    				public void run() {
+    					JOptionPane.showMessageDialog(null, args[0]);
+    				}
+    			}, AttachmentType.INSTRUCTION);
+                serverOut.addNextMessage(message);
+    		}
+    		public String getTrigger() {
+    			return "-alert";
+    		}
+    		public String getInfo() {
+    			return "Sends an alert with the specified message.";
+    		}
+    	});*/
     }
     
     public boolean process(String command) {

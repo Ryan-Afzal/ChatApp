@@ -12,7 +12,7 @@ public class Message implements Serializable {
 	private String text;
 	private String timestamp;
 	private String user;
-	private Object attachment;
+	private Serializable attachment;
 	private AttachmentType attachment_type;
 	
 	/**
@@ -33,7 +33,7 @@ public class Message implements Serializable {
 	 * @param attachment The attachment of the message.
 	 * @param attachment_type The type of the attachment.
 	 */
-	public Message(String text, String timestamp, String user, Object attachment, AttachmentType attachment_type) {
+	public Message(String text, String timestamp, String user, Serializable attachment, AttachmentType attachment_type) {
 		super();
 		this.text = text;
 		this.timestamp = timestamp;
@@ -93,7 +93,7 @@ public class Message implements Serializable {
 	 * Gets the attachment of the message.
 	 * @return Returns the attachment of the message.
 	 */
-	public Object getAttachment() {
+	public Serializable getAttachment() {
 		return this.attachment;
 	}
 	
