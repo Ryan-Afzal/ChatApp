@@ -28,6 +28,7 @@ import window.ApplicationWindow;
 @SuppressWarnings({ "serial", "unused" })
 public class Client extends ApplicationWindow {
     private static final int portNumber = 4444;
+    public final String ID;
     
     private boolean send = false;
     
@@ -61,6 +62,7 @@ public class Client extends ApplicationWindow {
     	super("ChatApp");
     	Tools.setLookAndFeel();
         this.userName = userName;
+        this.ID = userName;
         this.serverPort = portNumber;
         this.initActions();
         try {
@@ -133,7 +135,7 @@ public class Client extends ApplicationWindow {
                 	//Do Encryption here
                 	
                 	
-                	Message message = new Message(text, time, this.userName);
+                	Message message = new Message(text, time, this.userName, this.ID);
                     serverOut.addNextMessage(message);
                     send = false;
                     textField.setText("");

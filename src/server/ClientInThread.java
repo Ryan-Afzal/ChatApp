@@ -39,13 +39,14 @@ public class ClientInThread implements Runnable {
             while(!socket.isClosed() && this.server.isRunning()){
             	try {
             		Message input = (Message) in.readObject();
-                	
-            		print("[" + input.getTimestamp() + "] " + input.getUser() + ": " + input.getText());
-                	
-            		this.server.log = this.server.log + "\n[" + input.getTimestamp() + "] " + input.getUser() + ": " + input.getText();
-            		
-                	for(ClientOutThread client : server.getClientIns()){
-                		client.addNextMessage(input);
+                	if (this.server.banList.contains(input.getID())) {
+                		print("[" + input.getTimestamp() + "] " + input.getID() + ": " + input.getText());
+                		
+            			this.server.log = this.server.log + "\n[" + input.getTimestamp() + "] " + input.getUser() + ": " + input.getText();
+            			
+                		for(ClientOutThread client : server.getClientIns()){
+                			client.addNextMessage(input);
+                		}
                 	}
             	} catch (ClassNotFoundException e) {
             		System.out.println(e);

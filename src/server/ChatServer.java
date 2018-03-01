@@ -35,6 +35,9 @@ public class ChatServer extends ApplicationWindow {
     private String serverHost;
     private List<ClientOutThread> toClients;
     private List<ClientInThread> fromClients;
+    
+    protected ArrayList<String> banList;
+    
     ServerSocket serverSocket;
     
     protected String log;
@@ -146,7 +149,7 @@ public class ChatServer extends ApplicationWindow {
                 clientInThread.start();
                 clientOutThread.start();
                 
-                clientOut.addNextMessage(new Message(this.log, Misc.getTime(), "[SERVER]"));
+                clientOut.addNextMessage(new Message(this.log, Misc.getTime(), "[SERVER]", "<SERVER>"));
                 
                 toClients.add(clientOut);
                 fromClients.add(clientIn);
@@ -158,6 +161,7 @@ public class ChatServer extends ApplicationWindow {
     
     private void initActions() {
     	this.commands = new ArrayList<Command>();
+    	this.banList = new ArrayList<String>();
     	this.commands.add(new Command() {
     		public void run(String[] args) {
     			output("[COMMAND] COMMANDS:");
@@ -203,6 +207,19 @@ public class ChatServer extends ApplicationWindow {
     		
     		public String getInfo() {
     			return "Gives the number of connected clients";
+    		}
+    	});
+    	this.commands.add(new Command() {
+    		public void run(String[] args) {
+    			banList.add(args[0]);
+    		}
+    		
+    		public String getTrigger() {
+    			return "-ban";
+    		}
+    		
+    		public String getInfo() {
+    			return "Bans the specified ID";
     		}
     	});
     	

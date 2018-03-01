@@ -12,6 +12,7 @@ public class Message implements Serializable {
 	private String text;
 	private String timestamp;
 	private String user;
+	private String id;
 	private Serializable attachment;
 	private AttachmentType attachment_type;
 	
@@ -21,8 +22,8 @@ public class Message implements Serializable {
 	 * @param timestamp The time at which the message was sent.
 	 * @param user The user who sent the message.
 	 */
-	public Message(String text, String timestamp, String user) {
-		this(text, timestamp, user, null, AttachmentType.NONE);
+	public Message(String text, String timestamp, String user, String id) {
+		this(text, timestamp, user, id, null, AttachmentType.NONE);
 	}
 	
 	/**
@@ -33,11 +34,12 @@ public class Message implements Serializable {
 	 * @param attachment The attachment of the message.
 	 * @param attachment_type The type of the attachment.
 	 */
-	public Message(String text, String timestamp, String user, Serializable attachment, AttachmentType attachment_type) {
+	public Message(String text, String timestamp, String user, String id, Serializable attachment, AttachmentType attachment_type) {
 		super();
 		this.text = text;
 		this.timestamp = timestamp;
 		this.user = user;
+		this.id = id;
 		this.attachment = attachment;
 		this.attachment_type = attachment_type;
 	}
@@ -46,7 +48,7 @@ public class Message implements Serializable {
 	 * Creates an {@code new} Message with a default text, timestamp, and user.
 	 */
 	public Message() {
-		this("NO MESSAGE", "?", "<?>");
+		this("NO MESSAGE", "?", "<?>", "<?>");
 	}
 	
 	/**
@@ -103,6 +105,10 @@ public class Message implements Serializable {
 	 */
 	public AttachmentType getAttachmentType() {
 		return this.attachment_type;
+	}
+	
+	public String getID() {
+		return this.id;
 	}
 
 }
