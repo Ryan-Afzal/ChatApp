@@ -5,6 +5,7 @@ import java.net.Socket;
 import java.util.LinkedList;
 
 import message.Message;
+import command.Instruction;
 
 public class ServerOutThread implements Runnable {
 	
@@ -21,8 +22,6 @@ public class ServerOutThread implements Runnable {
         this.client = client;
         messagesToSend = new LinkedList<Message>();
 	}
-	
-	
 
 	@Override
 	public void run() {

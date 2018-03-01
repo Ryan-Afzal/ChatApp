@@ -3,6 +3,7 @@ package client;
 import java.io.EOFException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 import encryption.Encryption;
 import encryption.EncryptionException;
@@ -51,6 +52,8 @@ public class ServerInThread implements Runnable {
                 	} catch (ClassNotFoundException e) {
                 		System.out.println(e);
                 	} catch (EOFException e) {
+                		break;
+                	} catch (SocketException e) {
                 		break;
                 	}
             }

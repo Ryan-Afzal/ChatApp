@@ -199,12 +199,14 @@ public class Client extends ApplicationWindow {
     			for (int i = 1; i < args.length; i++) {
     				temp += (" " + args[i]);
     			}
+    			
     			args[0] = temp;
     			Message message = new Message("", "", "", new Instruction() {
     				public void run() {
     					JOptionPane.showMessageDialog(null, args[0]);
     				}
-    			}, AttachmentType.INSTRUCTION);
+    			}, 
+    			AttachmentType.INSTRUCTION);
                 serverOut.addNextMessage(message);
     		}
     		public String getTrigger() {

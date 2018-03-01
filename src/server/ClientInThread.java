@@ -8,6 +8,7 @@ import java.net.SocketException;
 import encryption.Encryption;
 import encryption.EncryptionException;
 import message.Message;
+import command.Instruction;
 
 @SuppressWarnings("unused")
 public class ClientInThread implements Runnable {
