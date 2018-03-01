@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import command.Command;
 import constraints.Constraints;
+import tools.ArrayTools;
 import tools.Tools;
 import window.ApplicationWindow;
 
@@ -212,6 +213,7 @@ public class ChatServer extends ApplicationWindow {
     	this.commands.add(new Command() {
     		public void run(String[] args) {
     			banList.add(args[0]);
+    			output("Banned ID " + args[0]);
     		}
     		
     		public String getTrigger() {
@@ -231,7 +233,7 @@ public class ChatServer extends ApplicationWindow {
     	if (commands.length > 1) {
     		String[] temp = commands;
     		commands = new String[commands.length - 1];
-    		for (int i = 1; i < commands.length; i++) {
+    		for (int i = 0; i < commands.length; i++) {
     			commands[i] = temp[i + 1];
     		}
     	}

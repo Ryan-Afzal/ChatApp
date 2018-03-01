@@ -39,7 +39,7 @@ public class ClientInThread implements Runnable {
             while(!socket.isClosed() && this.server.isRunning()){
             	try {
             		Message input = (Message) in.readObject();
-                	if (this.server.banList.contains(input.getID())) {
+                	if (!this.server.banList.contains(input.getID())) {
                 		print("[" + input.getTimestamp() + "] " + input.getID() + ": " + input.getText());
                 		
             			this.server.log = this.server.log + "\n[" + input.getTimestamp() + "] " + input.getUser() + ": " + input.getText();
