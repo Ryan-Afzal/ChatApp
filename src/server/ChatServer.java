@@ -9,7 +9,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -37,7 +39,7 @@ public class ChatServer extends ApplicationWindow {
     private List<ClientOutThread> toClients;
     private List<ClientInThread> fromClients;
     
-    protected ArrayList<String> banList;
+    protected HashSet<String> banList;
     
     ServerSocket serverSocket;
     
@@ -162,7 +164,7 @@ public class ChatServer extends ApplicationWindow {
     
     private void initActions() {
     	this.commands = new ArrayList<Command>();
-    	this.banList = new ArrayList<String>();
+    	this.banList = new HashSet<String>();
     	this.commands.add(new Command() {
     		public void run(String[] args) {
     			output("[COMMAND] COMMANDS:");
@@ -222,6 +224,20 @@ public class ChatServer extends ApplicationWindow {
     		
     		public String getInfo() {
     			return "Bans the specified ID";
+    		}
+    	});
+    	this.commands.add(new Command() {
+    		public void run(String[] args) {
+    			banList.remove(args[0]);
+    			output("Unbanned ID " + args[0]);
+    		}
+    		
+    		public String getTrigger() {
+    			return "-unban";
+    		}
+    		
+    		public String getInfo() {
+    			return "Unbans the specified ID";
     		}
     	});
     	
