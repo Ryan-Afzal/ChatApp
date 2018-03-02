@@ -16,13 +16,13 @@ import java.util.GregorianCalendar;
 
 import javax.swing.*;
 
-import command.Alert;
-import command.Command;
-import command.Instruction;
 import constraints.Constraints;
-import message.AttachmentType;
-import message.Message;
-import misc.Misc;
+import core.command.Alert;
+import core.command.Command;
+import core.command.Instruction;
+import core.message.AttachmentType;
+import core.message.Message;
+import core.misc.Misc;
 import server.ClientInThread;
 import tools.Tools;
 import window.ApplicationWindow;

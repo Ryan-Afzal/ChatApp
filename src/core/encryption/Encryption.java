@@ -1,4 +1,4 @@
-package encryption;
+package core.encryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;

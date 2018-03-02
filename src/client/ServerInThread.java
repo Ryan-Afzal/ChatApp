@@ -5,10 +5,10 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
-import encryption.Encryption;
-import encryption.EncryptionException;
-import message.Message;
-import command.*;
+import core.command.*;
+import core.encryption.Encryption;
+import core.encryption.EncryptionException;
+import core.message.Message;
 
 @SuppressWarnings("unused")
 public class ServerInThread implements Runnable {

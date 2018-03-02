@@ -1,4 +1,4 @@
-package encryption;
+package core.encryption;
 
 public class EncryptionException extends Exception {
 		

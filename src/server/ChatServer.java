@@ -17,13 +17,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import command.*;
 import constraints.Constraints;
+import core.command.*;
+import core.message.Message;
+import core.misc.Misc;
 import tools.Tools;
 import window.ApplicationWindow;
-
-import message.Message;
-import misc.Misc;
 
 public class ChatServer extends ApplicationWindow {
 	

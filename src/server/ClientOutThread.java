@@ -4,8 +4,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.LinkedList;
 
-import message.Message;
-import command.*;
+import core.command.*;
+import core.message.Message;
 
 @SuppressWarnings("unused")
 public class ClientOutThread implements Runnable {

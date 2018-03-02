@@ -1,9 +1,9 @@
-package message;
+package core.message;
 
 import java.io.Serializable;
 
-import misc.Misc;
-import misc.Nullable;
+import core.misc.Misc;
+import core.misc.Nullable;
 
 /**
  * General 'data packet' class, used to store a message for transmission.

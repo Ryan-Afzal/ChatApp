@@ -1,4 +1,4 @@
-package command;
+package core.command;
 
 import java.io.Serializable;
 

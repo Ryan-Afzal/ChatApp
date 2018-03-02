@@ -1,4 +1,4 @@
-package misc;
+package core.misc;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

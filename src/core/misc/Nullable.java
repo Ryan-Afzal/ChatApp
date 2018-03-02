@@ -1,4 +1,4 @@
-package misc;
+package core.misc;
 
 import static java.lang.annotation.ElementType.PARAMETER;
 
