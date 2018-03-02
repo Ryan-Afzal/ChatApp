@@ -8,7 +8,7 @@ import java.net.SocketException;
 import encryption.Encryption;
 import encryption.EncryptionException;
 import message.Message;
-import command.Instruction;
+import command.*;
 
 @SuppressWarnings("unused")
 public class ServerInThread implements Runnable {
@@ -46,7 +46,7 @@ public class ServerInThread implements Runnable {
                 				break;
                 			case INSTRUCTION:
                 				Instruction inst = (Instruction) input.getAttachment();
-                				inst.run();
+                				inst.run(client, input.getArgs());
                 				break;
                 		}
                 	} catch (ClassNotFoundException e) {

@@ -5,8 +5,9 @@ import java.net.Socket;
 import java.util.LinkedList;
 
 import message.Message;
-import command.Instruction;
+import command.*;
 
+@SuppressWarnings("unused")
 public class ServerOutThread implements Runnable {
 	
 	private Socket socket;

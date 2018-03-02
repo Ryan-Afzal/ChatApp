@@ -15,6 +15,7 @@ public class Message implements Serializable {
 	private String id;
 	private Serializable attachment;
 	private AttachmentType attachment_type;
+	private String[] args;
 	
 	/**
 	 * Creates a {@code new} Message, with the specified text, timestamp, and user, and a {@code null} attachment.
@@ -23,7 +24,7 @@ public class Message implements Serializable {
 	 * @param user The user who sent the message.
 	 */
 	public Message(String text, String timestamp, String user, String id) {
-		this(text, timestamp, user, id, null, AttachmentType.NONE);
+		this(text, timestamp, user, id, null, AttachmentType.NONE, null);
 	}
 	
 	/**
@@ -34,7 +35,7 @@ public class Message implements Serializable {
 	 * @param attachment The attachment of the message.
 	 * @param attachment_type The type of the attachment.
 	 */
-	public Message(String text, String timestamp, String user, String id, Serializable attachment, AttachmentType attachment_type) {
+	public Message(String text, String timestamp, String user, String id, Serializable attachment, AttachmentType attachment_type, String[] args) {
 		super();
 		this.text = text;
 		this.timestamp = timestamp;
@@ -42,6 +43,7 @@ public class Message implements Serializable {
 		this.id = id;
 		this.attachment = attachment;
 		this.attachment_type = attachment_type;
+		this.args = args;
 	}
 	
 	/**
@@ -109,6 +111,10 @@ public class Message implements Serializable {
 	
 	public String getID() {
 		return this.id;
+	}
+
+	public String[] getArgs() {
+		return args;
 	}
 
 }

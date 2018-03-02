@@ -11,15 +11,13 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import command.Command;
+import command.*;
 import constraints.Constraints;
-import tools.ArrayTools;
 import tools.Tools;
 import window.ApplicationWindow;
 

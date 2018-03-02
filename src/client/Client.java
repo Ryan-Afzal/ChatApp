@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -15,6 +16,7 @@ import java.util.GregorianCalendar;
 
 import javax.swing.*;
 
+import command.Alert;
 import command.Command;
 import command.Instruction;
 import constraints.Constraints;
@@ -194,7 +196,7 @@ public class Client extends ApplicationWindow {
     			return "Changes the user's name to the entered value.";
     		}
     	});
-    	/*this.commands.add(new Command() {
+    	this.commands.add(new Command() {
     		public void run(String[] args) {
     			String temp = args[0];
     			
@@ -203,21 +205,19 @@ public class Client extends ApplicationWindow {
     			}
     			
     			args[0] = temp;
-    			Message message = new Message("", "", "", new Instruction() {
-    				public void run() {
-    					JOptionPane.showMessageDialog(null, args[0]);
-    				}
-    			}, 
-    			AttachmentType.INSTRUCTION);
+    			Serializable inst = new Alert();
+    			Message message = new Message(("[Alert]:" + args[0]), Misc.getTime(), userName, ID, inst, AttachmentType.INSTRUCTION, args);
                 serverOut.addNextMessage(message);
     		}
+    		
     		public String getTrigger() {
     			return "-alert";
     		}
+    		
     		public String getInfo() {
     			return "Sends an alert with the specified message.";
     		}
-    	});*/
+    	});
     }
     
     public boolean process(String command) {

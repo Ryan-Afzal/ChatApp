@@ -5,8 +5,9 @@ import java.net.Socket;
 import java.util.LinkedList;
 
 import message.Message;
-import command.Instruction;
+import command.*;
 
+@SuppressWarnings("unused")
 public class ClientOutThread implements Runnable {
 	
 	private ChatServer server;

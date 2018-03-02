@@ -7,8 +7,9 @@ import java.net.SocketException;
 
 import encryption.Encryption;
 import encryption.EncryptionException;
+import message.AttachmentType;
 import message.Message;
-import command.Instruction;
+import command.*;
 
 @SuppressWarnings("unused")
 public class ClientInThread implements Runnable {
@@ -42,7 +43,9 @@ public class ClientInThread implements Runnable {
                 	if (!this.server.banList.contains(input.getID())) {
                 		print("[" + input.getTimestamp() + "] " + input.getID() + ": " + input.getText());
                 		
-            			this.server.log = this.server.log + "\n[" + input.getTimestamp() + "] " + input.getUser() + ": " + input.getText();
+                		if (input.getAttachmentType() != AttachmentType.INSTRUCTION) {
+                			this.server.log = this.server.log + "\n[" + input.getTimestamp() + "] " + input.getUser() + ": " + input.getText();
+                		}
             			
                 		for(ClientOutThread client : server.getClientIns()){
                 			client.addNextMessage(input);
