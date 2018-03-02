@@ -2,6 +2,8 @@ package message;
 
 import java.io.Serializable;
 
+import misc.Nullable;
+
 /**
  * General 'data packet' class, used to store a message for transmission.
  * @author s-afzalr
@@ -36,7 +38,7 @@ public class Message implements Serializable {
 	 * @param attachment_type The type of the attachment.
 	 * @param args Arguments passed to an attachment.
 	 */
-	public Message(String text, String timestamp, String user, String id, Serializable attachment, AttachmentType attachment_type, String[] args) {
+	public Message(String text, String timestamp, String user, String id, Serializable attachment, AttachmentType attachment_type, @Nullable String[] args) {
 		super();
 		this.text = text;
 		this.timestamp = timestamp;
