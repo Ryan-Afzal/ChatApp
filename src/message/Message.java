@@ -34,6 +34,7 @@ public class Message implements Serializable {
 	 * @param user The user who sent the message.
 	 * @param attachment The attachment of the message.
 	 * @param attachment_type The type of the attachment.
+	 * @param args Arguments passed to an attachment.
 	 */
 	public Message(String text, String timestamp, String user, String id, Serializable attachment, AttachmentType attachment_type, String[] args) {
 		super();
@@ -77,6 +78,7 @@ public class Message implements Serializable {
 		return this.user;
 	}
 	
+	@Override
 	public String toString() {
 		return "[" + getTimestamp() + "] " + getUser() + ": " + getText();
 	}
