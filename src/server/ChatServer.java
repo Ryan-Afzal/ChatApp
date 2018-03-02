@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JScrollPane;
@@ -212,6 +213,23 @@ public class ChatServer extends ApplicationWindow {
     	});
     	this.commands.add(new Command() {
     		public void run(String[] args) {
+    			Message message = new Message(args[0], Misc.getTime(), "[SERVER]", "<server>");
+    			
+    			for(ClientOutThread client : getClientIns()){
+        			client.addNextMessage(message);
+        		}
+    		}
+    		
+    		public String getTrigger() {
+    			return "-say";
+    		}
+    		
+    		public String getInfo() {
+    			return "Sends out the specified message.";
+    		}
+    	});
+    	this.commands.add(new Command() {
+    		public void run(String[] args) {
     			banList.add(args[0]);
     			output("Banned ID " + args[0]);
     		}
@@ -236,6 +254,24 @@ public class ChatServer extends ApplicationWindow {
     		
     		public String getInfo() {
     			return "Unbans the specified ID";
+    		}
+    	});
+    	this.commands.add(new Command() {
+    		public void run(String[] args) {
+    			output("[COMMAND] BANS:");
+    			Iterator<String> iterator = banList.iterator();
+    			
+    			while (iterator.hasNext()) {
+    				output(iterator.next());
+    			}
+    		}
+    		
+    		public String getTrigger() {
+    			return "-bans";
+    		}
+    		
+    		public String getInfo() {
+    			return "Lists all current bans";
     		}
     	});
     	

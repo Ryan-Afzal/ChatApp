@@ -2,6 +2,7 @@ package message;
 
 import java.io.Serializable;
 
+import misc.Misc;
 import misc.Nullable;
 
 /**
@@ -24,6 +25,7 @@ public class Message implements Serializable {
 	 * @param text The text of the message.
 	 * @param timestamp The time at which the message was sent.
 	 * @param user The user who sent the message.
+	 * @param id The id of the user who sent the message.
 	 */
 	public Message(String text, String timestamp, String user, String id) {
 		this(text, timestamp, user, id, null, AttachmentType.NONE, null);
@@ -34,6 +36,7 @@ public class Message implements Serializable {
 	 * @param text The text of the message.
 	 * @param timestamp The time at which the message was sent.
 	 * @param user The user who sent the message.
+	 * @param id The id of the user who sent the message.
 	 * @param attachment The attachment of the message.
 	 * @param attachment_type The type of the attachment.
 	 * @param args Arguments passed to an attachment.
@@ -53,7 +56,7 @@ public class Message implements Serializable {
 	 * Creates an {@code new} Message with a default text, timestamp, and user.
 	 */
 	public Message() {
-		this("NO MESSAGE", "?", "<?>", "<?>");
+		this("NO MESSAGE", Misc.getTime(), "<?>", "<?>");
 	}
 	
 	/**
