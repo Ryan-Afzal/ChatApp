@@ -33,7 +33,7 @@ public class ClientOutThread implements Runnable {
             serverOut.flush();
             
             while (!socket.isClosed() && this.server.isRunning()) {
-                if(!messagesToSend.isEmpty()){
+                if(!messagesToSend.isEmpty()) {
                     Message nextSend;
                     synchronized (messagesToSend) {
                         nextSend = messagesToSend.pop();

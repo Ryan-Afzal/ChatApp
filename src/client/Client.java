@@ -94,9 +94,11 @@ public class Client extends ApplicationWindow {
         textField.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		for (Command command : commands) {
-        			if (command.getTrigger().equals(textField.getText().split(" ")[0])) {
-        				process(textField.getText());
-        				return;
+        			for (String trigger : command.getTriggers()) {
+        				if (trigger.equals(textField.getText().split(" ")[0])) {
+        					process(textField.getText());
+        					return;
+        				}
         			}
         		}
         		send = true;
@@ -169,12 +171,14 @@ public class Client extends ApplicationWindow {
     		public void run(String[] args) {
     			output("[COMMAND] COMMANDS:");
     			for (int i = 1; i < commands.size(); i++) {
-    				output(commands.get(i).getTrigger() + ": " + commands.get(i).getInfo());
+    				output(commands.get(i).getTriggers()[0] + ": " + commands.get(i).getInfo());
     			}
     		}
     		
-    		public String getTrigger() {
-    			return "-commands";
+    		public String[] getTriggers() {
+    			return new String[] {
+    				"/commands",
+    			};
     		}
     	});
     	this.commands.add(new Command() {
@@ -188,8 +192,11 @@ public class Client extends ApplicationWindow {
     			userName = temp;
     		}
     		
-    		public String getTrigger() {
-    			return "-name";
+    		public String[] getTriggers() {
+    			return new String[] {
+    					"/name",
+    					"/n",
+    			};
     		}
     		
     		public String getInfo() {
@@ -210,8 +217,10 @@ public class Client extends ApplicationWindow {
                 serverOut.addNextMessage(message);
     		}
     		
-    		public String getTrigger() {
-    			return "-alert";
+    		public String[] getTriggers() {
+    			return new String[] {
+    				"/alert"	
+    			};
     		}
     		
     		public String getInfo() {
@@ -231,10 +240,12 @@ public class Client extends ApplicationWindow {
     		}
     	}
     	for (Command c : this.commands) {
-    		if (c.getTrigger().equals(command)) {
-    			c.run(commands);
-    			textField.setText("");
-    			return true;
+    		for (String trigger : c.getTriggers()) {
+    			if (trigger.equals(command)) {
+        			c.run(commands);
+        			textField.setText("");
+        			return true;
+    			}
     		}
     	}
     	return false;
