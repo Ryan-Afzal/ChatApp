@@ -215,6 +215,7 @@ public class ChatServer extends ApplicationWindow {
     					"/cs",
     					"/listclients",
     					"/lclients",
+    					"/ls",
     			};
     		}
     		

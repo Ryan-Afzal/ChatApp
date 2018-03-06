@@ -23,9 +23,10 @@ import core.misc.Misc;
 import tools.Tools;
 import window.ApplicationWindow;
 
-@SuppressWarnings({ "serial", "unused" })
 public class Client extends ApplicationWindow {
-    private static final int portNumber = 4444;
+    
+	private static final long serialVersionUID = 1L;
+	private static final int portNumber = 4444;
     public final String ID;
     
     private boolean send = false;
@@ -173,7 +174,9 @@ public class Client extends ApplicationWindow {
     		
     		public String[] getTriggers() {
     			return new String[] {
+    				"/help",
     				"/commands",
+    				"/h",
     			};
     		}
     	});
@@ -215,7 +218,7 @@ public class Client extends ApplicationWindow {
     		
     		public String[] getTriggers() {
     			return new String[] {
-    				"/alert"	
+    				"/alert"
     			};
     		}
     		
