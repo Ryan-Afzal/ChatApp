@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import constraints.Constraints;
-import core.command.*;
+import core.command.Command;
 import core.message.Message;
 import core.misc.Misc;
 import tools.Tools;
@@ -167,12 +167,16 @@ public class ChatServer extends ApplicationWindow {
     		public void run(String[] args) {
     			output("[COMMAND] COMMANDS:");
     			for (int i = 1; i < commands.size(); i++) {
-    				output(commands.get(i).getTrigger() + ": " + commands.get(i).getInfo());
+    				output(commands.get(i).getTriggers()[0] + ": " + commands.get(i).getInfo());
     			}
     		}
     		
-    		public String getTrigger() {
-    			return "-commands";
+    		public String[] getTriggers() {
+    			return new String[] {
+    					"/help",
+    					"/commands",
+    					"/h",
+    			};
     		}
     	});
     	this.commands.add(new Command() {
@@ -180,8 +184,11 @@ public class ChatServer extends ApplicationWindow {
     			output("[COMMAND] IP: " + serverSocket.getInetAddress().toString());
     		}
     		
-    		public String getTrigger() {
-    			return "-ip";
+    		public String[] getTriggers() {
+    			return new String[] {
+    					"/getip",
+    					"/ip",
+    			};
     		}
     		
     		public String getInfo() {
@@ -202,8 +209,13 @@ public class ChatServer extends ApplicationWindow {
     			output("[COMMAND] CLIENTS: " + fromClients.size());
     		}
     		
-    		public String getTrigger() {
-    			return "-clients";
+    		public String[] getTriggers() {
+    			return new String[] {
+    					"/clients",
+    					"/cs",
+    					"/listclients",
+    					"/lclients",
+    			};
     		}
     		
     		public String getInfo() {
@@ -219,8 +231,11 @@ public class ChatServer extends ApplicationWindow {
         		}
     		}
     		
-    		public String getTrigger() {
-    			return "-say";
+    		public String[] getTriggers() {
+    			return new String[] {
+    					"/say",
+    					"/s",
+    			};
     		}
     		
     		public String getInfo() {
@@ -233,8 +248,11 @@ public class ChatServer extends ApplicationWindow {
     			output("Banned ID " + args[0]);
     		}
     		
-    		public String getTrigger() {
-    			return "-ban";
+    		public String[] getTriggers() {
+    			return new String[] {
+    					"/ban",
+    					"/b",
+    			};
     		}
     		
     		public String getInfo() {
@@ -247,8 +265,11 @@ public class ChatServer extends ApplicationWindow {
     			output("Unbanned ID " + args[0]);
     		}
     		
-    		public String getTrigger() {
-    			return "-unban";
+    		public String[] getTriggers() {
+    			return new String[] {
+    					"/unban",
+    					"/ub",
+    			};
     		}
     		
     		public String getInfo() {
@@ -265,8 +286,13 @@ public class ChatServer extends ApplicationWindow {
     			}
     		}
     		
-    		public String getTrigger() {
-    			return "-bans";
+    		public String[] getTriggers() {
+    			return new String[] {
+    					"/bans",
+    					"/blist",
+    					"/listbans",
+    					"/lbans",
+    			};
     		}
     		
     		public String getInfo() {
@@ -287,10 +313,12 @@ public class ChatServer extends ApplicationWindow {
     		}
     	}
     	for (Command c : this.commands) {
-    		if (c.getTrigger().equals(command)) {
-    			c.run(commands);
-    			textField.setText("");
-    			return true;
+    		for (String trigger : c.getTriggers()) {
+    			if (trigger.equals(command)) {
+    				c.run(commands);
+    				textField.setText("");
+    				return true;
+    			}
     		}
     	}
     	return false;
