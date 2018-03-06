@@ -178,6 +178,10 @@ public class ChatServer extends ApplicationWindow {
     					"/h",
     			};
     		}
+    		
+    		public String getInfo() {
+    			return "Lists all availible commands";
+    		}
     	});
     	this.commands.add(new Command() {
     		public void run(String[] args) {
