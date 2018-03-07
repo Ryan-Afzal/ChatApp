@@ -32,8 +32,9 @@ public class Client extends ApplicationWindow {
     private boolean send = false;
     
     private String userName;
-    ServerInThread serverIn;
-    ServerOutThread serverOut;
+    private ServerInThread serverIn;
+    private ServerOutThread serverOut;
+    private Socket socket;
     
     private String serverHost;
     private int serverPort;
@@ -121,7 +122,7 @@ public class Client extends ApplicationWindow {
 
     private void startClient() {
         try{
-            Socket socket = new Socket(serverHost, serverPort);
+            socket = new Socket(serverHost, serverPort);
             Thread.sleep(1000);
             serverIn = new ServerInThread(socket, this);
             serverOut = new ServerOutThread(socket, this);
@@ -248,6 +249,15 @@ public class Client extends ApplicationWindow {
     		}
     	}
     	return false;
+    }
+    
+    public void disconnect() {
+    		try {
+				this.socket.close();
+			} catch (IOException e) {
+				this.serverIn  = null;
+				this.serverOut = null;
+			}
     }
     
     /*public byte[] getKey() {
