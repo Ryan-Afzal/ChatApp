@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -19,6 +20,8 @@ import javax.swing.JTextField;
 
 import constraints.Constraints;
 import core.command.Command;
+import core.command.Kick;
+import core.message.AttachmentType;
 import core.message.Message;
 import core.misc.Misc;
 import tools.Tools;
@@ -304,7 +307,32 @@ public class ChatServer extends ApplicationWindow {
     			return "Lists all current bans";
     		}
     	});
-    	
+    	this.commands.add(new Command() {
+    		public void run(String[] args) {
+    			String temp = args[0];
+    			
+    			for (int i = 1; i < args.length; i++) {
+    				temp += (" " + args[i]);
+    			}
+    			
+    			args[0] = temp;
+    			Serializable inst = new Kick();
+    			Message message = new Message(("[Kicked]:" + args[0]), Misc.getTime(), "[SERVER]", "<server>", inst, AttachmentType.INSTRUCTION, args);
+    			for(ClientOutThread client : getClientIns()){
+        			client.addNextMessage(message);
+        		}
+    		}
+    		
+    		public String[] getTriggers() {
+    			return new String[] {
+    				"/kick"
+    			};
+    		}
+    		
+    		public String getInfo() {
+    			return "Sends an alert with the specified message.";
+    		}
+    	});
     }
     
     public boolean process(String command) {
