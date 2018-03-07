@@ -41,6 +41,7 @@ public class ClientOutThread implements Runnable {
                     serverOut.writeObject(nextSend);
                     serverOut.flush();
                 }
+                
             }
             serverOut.close();
         } catch(Exception ex){
