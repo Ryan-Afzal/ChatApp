@@ -29,6 +29,8 @@ public class Client extends ApplicationWindow {
 	private static final int portNumber = 4444;
     public final String ID;
     
+    public static Client client = null;
+    
     private boolean send = false;
     
     private String userName;
@@ -54,7 +56,7 @@ public class Client extends ApplicationWindow {
     
     public static void main(String[] args) {
     	String readName = System.getProperty("user.name");
-        Client client = new Client(readName, portNumber);
+        client = new Client(readName, portNumber);
         client.startClient();
     }
     
@@ -258,6 +260,10 @@ public class Client extends ApplicationWindow {
 				this.serverIn  = null;
 				this.serverOut = null;
 			}
+    }
+    
+    public static Client getClient() {
+    	return client;
     }
     
     /*public byte[] getKey() {
