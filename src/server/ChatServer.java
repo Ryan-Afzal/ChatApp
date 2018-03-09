@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 
 import constraints.Constraints;
 import core.command.Command;
-import core.command.Kick;
 import core.message.AttachmentType;
 import core.message.Message;
 import core.misc.Misc;

@@ -1,8 +1,9 @@
-package core.command;
+package server;
 
 import java.io.Serializable;
 
 import client.Client;
+import core.command.Instruction;
 
 public class Kick implements Instruction, Serializable {
 

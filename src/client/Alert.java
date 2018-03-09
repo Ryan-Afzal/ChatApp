@@ -1,10 +1,10 @@
-package core.command;
+package client;
 
 import java.io.Serializable;
 
 import javax.swing.JOptionPane;
 
-import client.Client;
+import core.command.Instruction;
 
 public class Alert implements Instruction, Serializable {
 	

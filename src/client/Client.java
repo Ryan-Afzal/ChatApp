@@ -15,7 +15,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import constraints.Constraints;
-import core.command.Alert;
 import core.command.Command;
 import core.message.AttachmentType;
 import core.message.Message;
